@@ -69,9 +69,9 @@ def multiply(directory):
 multiply(output)
 
 def convert(directory, prefix_add, replace_empty, replace_comma, replace_num, replace_space):
-    multiply(directory)
     add_prefix(directory, prefix_add)
     replace_all(directory, replace_space, replace_comma)
+    multiply(directory)
     replace_all(directory, replace_num, replace_empty)
 
 
