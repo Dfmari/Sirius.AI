@@ -2,11 +2,12 @@ from ultralytics import YOLO
 import os
 import csv
 
-# Activate Model
+
 model = YOLO('model.pt')
+#activation of the trained model using provided weights. 
 results = model(source='Input', show=False, conf=0.5, save_txt=True, imgsz=(2101, 2101))
 
-#Convert model output-----------------------------------------------------------------------------------------------------------------------------------------------------
+#Formatting of model output-----------------------------------------------------------------------------------------------------------------------------------------------------
 Output = 'runs/detect/predict2/labels'
 Input = 'Input'
 def add_prefix(directory, prefix):
