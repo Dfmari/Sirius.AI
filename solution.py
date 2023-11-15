@@ -1,14 +1,13 @@
 from ultralytics import YOLO
 import os
 import csv
-import time
 
 # Activate Model
 model = YOLO('model.pt')
-results = model(source='Input', show=False, conf=0.1, save_txt=True, imgsz=(2101, 2101))
+results = model(source='Input', show=False, conf=0.5, save_txt=True, imgsz=(2101, 2101))
 
 #Convert model output-----------------------------------------------------------------------------------------------------------------------------------------------------
-Output = 'runs/detect/predict1/labels'
+Output = 'runs/detect/predict2/labels'
 Input = 'Input'
 def add_prefix(directory, prefix):
     for filename in os.listdir(directory):
@@ -55,7 +54,7 @@ def multiply(directory):
                 data = line.strip().split(',')
             
                 # Divide the numbers in all columns except the first one by 2101
-                modified_data = [data[0]] + [str(float(value) * 2101) for value in data[1:]]
+                modified_data = [data[0]] + [str(int(float(value) * 2101)) for value in data[1:]]
             
                 # Join the modified data back into a CSV format line
                 modified_line = ','.join(modified_data) + '\n'
@@ -66,7 +65,6 @@ def multiply(directory):
         with open(file_path, 'w') as file:
             file.writelines(modified_lines)
 
-multiply(output)
 
 def convert(directory, prefix_add, replace_empty, replace_comma, replace_num, replace_space):
     add_prefix(directory, prefix_add)
@@ -76,11 +74,3 @@ def convert(directory, prefix_add, replace_empty, replace_comma, replace_num, re
 
 
 convert(Output, 'Class_', '', ',', '.0', ' ')
-
-
-
-
-
-
-
-
